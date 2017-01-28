@@ -1,0 +1,79 @@
+<html ng-app="todo">
+
+<head>
+  <title>Todo Application</title>
+
+  <!--bootstrap-->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+  <!--font-awesome-->
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+
+  <!--jquery-->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <!--custom style-->
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body>
+
+  <div class="container padding-top-lg">
+    <div class="row">
+      <!--filter todo-->
+      <div class="col-md-12">
+        <div class="form-group">
+          <input type="text" class="form-control input-lg" ng-model="data.filter" placeholder="Cari Agenda" />
+        </div>
+      </div>
+      <div class="col-md-12 no-overflow">
+        <button type="button" class="btn btn-primary pull-right">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+
+      <!--end filter todo-->
+    </div>
+    <div class="row padding-top-lg">
+      <div class="col-md-12">
+        <!--panel agenda-->
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" /> Agenda 1
+                  </label>
+                </div>
+
+              </div>
+              <div class="col-md-4 text-right">
+                
+                <div class="button-group">
+                  <button type="button" class="btn btn-success">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button type="button" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!--end panel agenda-->
+      </div>
+    </div>
+  </div>
+
+  <!--angular-->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
