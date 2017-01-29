@@ -1,6 +1,12 @@
 # todo-app
 sample angular application
 
+Requirement : 
+
+1. NodeJS [docs here](http://www.nodejs.org)
+2. Bower [docs here](http://www.bower.io)
+
+Step : 
 
 1. npm install
 2. cd app && bower install
