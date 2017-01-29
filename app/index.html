@@ -9,6 +9,9 @@
   <!--font-awesome-->
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
 
+  <!--animate.css-->
+  <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" />
+
   <!--jquery-->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -23,6 +26,7 @@
     <div class="row">
       <!--filter todo-->
       <div class="col-md-12">
+        <h3>To Do Apps</h3>
         <div class="form-group">
           <div class="input-group">
             <input type="text" class="form-control" ng-model="data.todo" placeholder="I want to do ....">
@@ -31,14 +35,14 @@
                 <i class="fa fa-plus"></i> Add
               </button>
             </span>
-            
+
           </div>
           <!-- /input-group -->
 
         </div>
       </div>
       <div class="col-md-12 no-overflow">
-        
+
       </div>
 
       <!--end filter todo-->
@@ -47,24 +51,34 @@
       <div class="col-md-12">
 
         <!--panel agenda-->
-        <div class="panel panel-default" ng-repeat="todo in todos | filter:data.todo">
+        <div class="panel panel-default" ng-repeat="todo in todos">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-8">
-                <div class="checkbox">
+                <div class="checkbox" ng-hide="todo.isEdit">
                   <label>
-                    <input type="checkbox" /> {{ todo.name }}
+                    <input type="checkbox" ng-model="todo.isDone" ng-change="onChangeIsDone($index)" /> {{ todo.name }}
+                    
                   </label>
+                </div>
+
+                <div class="form-group" ng-show="todo.isEdit">
+                  <input type="text" class="form-control" ng-model="todo.editedName" ng-value="todo.name" />
                 </div>
 
               </div>
               <div class="col-md-4 text-right">
 
-                <div class="button-group">
-                  <button type="button" class="btn btn-success">
+
+
+                <div class="button-group" >
+                  <button class="btn btn-default" ng-click="onClickTodoSaveEdit($index)" ng-show="todo.isEdit">
+                    <i class="fa fa-save"></i>
+                  </button>
+                  <button type="button" class="btn btn-success" ng-click="onClickTodoEdit($index)" ng-hide="todo.isEdit">
                   <i class="fa fa-pencil"></i>
                 </button>
-                  <button type="button" class="btn btn-danger">
+                  <button type="button" class="btn btn-danger" ng-click="onClickTodoRemove($index)" ng-hide="todo.isEdit">
                   <i class="fa fa-trash"></i>
                 </button>
                 </div>
@@ -78,6 +92,9 @@
       </div>
     </div>
   </div>
+
+  <!--lodash-->
+  <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
   <!--angular-->
   <script src="bower_components/angular/angular.min.js"></script>
