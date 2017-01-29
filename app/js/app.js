@@ -42,31 +42,43 @@ function TodoController($scope, $rootScope, TodoFactory, $log) {
     todo: ''
   };
 
+  $scope.countIsDone = 0;
+
   $scope.todos = [];
 
-  $scope.onChangeIsDone = function onChangeIsDone() { };
+  $scope.onChangeIsDone = function onChangeIsDone(index) {
+    TodoFactory.isDone(index, $scope.todos[index].isDone);
+    $scope.todos = TodoFactory.todos;  
+    
+    $scope.countIsDone = TodoFactory.countIsDone;
+
+  };
   $scope.onClickTodoEdit = function onClickTodoEdit(index) {
+    /**
+     * UI handle
+     */
     $scope.todos[index].isEdit = true;
 
-    // Update data 
-    TodoFactory.todos = $scope.todos;
   };
   $scope.onClickTodoRemove = function onClickTodoRemove(index) {
-    $scope.todos.splice(index, 1);
-    delete $scope.todos[index];
-    $log.warn($scope.todos);
+    TodoFactory.remove(index);
+
+    $scope.todos = TodoFactory.todos;
   };
   $scope.onClickTodoSaveEdit = function onClickTodoSaveEdit(index) {
+    /**
+     * UI handle
+     */
     $scope.todos[index].isEdit = false;
-    $scope.todos[index].name = $scope.todos[index].editedName;
 
-    // Update data 
-    TodoFactory.todos = $scope.todos;
+    TodoFactory.update(index, $scope.todos[index].editedName);
+    $scope.todos = TodoFactory.todos;
+
   };
 
   $scope.addTodo = function addTodo() {
     TodoFactory.add($scope.data.todo);
-    $scope.todos = angular.copy(TodoFactory.todos);
+    $scope.todos = _.reverse(TodoFactory.todos);
     $scope.data.todo = "";
   };
 }
@@ -79,16 +91,39 @@ function TodoController($scope, $rootScope, TodoFactory, $log) {
 function TodoFactory($http, $log) {
 
   var todos = [];
+  var countIsDone = 0;
 
-  var add = function (todo) {
+  var add = function add(todo) {
     $log.log(todo);
     todos.push({
-      name: todo
+      name: todo,
+      isEdit: false,
+      createdAt: moment().format(),
+      isDone: false
     });
   };
 
+  var update = function update(index, newName) {
+    todos[index].name = newName;
+  };
+
+  var remove = function remove(index) {
+    todos.splice(index, 1);
+  };
+
+  var isDone = function isDone(index, isDone) {
+    todos[index].isDone = isDone;
+    if (isDone) countIsDone++;
+    $log.warn(countIsDone);
+  };
+
+
   return {
     add: add,
+    update: update,
+    remove: remove,
+    isDone: isDone,
+    countIsDone: countIsDone,
     todos: todos
   };
 }
