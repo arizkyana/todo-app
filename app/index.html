@@ -24,20 +24,28 @@
       <!--filter todo-->
       <div class="col-md-12">
         <div class="form-group">
-          <input type="text" class="form-control input-lg" ng-model="data.todo" placeholder="Cari Agenda" />
+          <div class="input-group">
+            <input type="text" class="form-control" ng-model="data.todo" placeholder="I want to do ....">
+            <span class="input-group-btn">
+              <button ng-click="addTodo()" class="btn btn-primary" type="button">
+                <i class="fa fa-plus"></i> Add
+              </button>
+            </span>
+            
+          </div>
+          <!-- /input-group -->
+
         </div>
       </div>
       <div class="col-md-12 no-overflow">
-        <button ng-click="addTodo()" type="button" class="btn btn-primary pull-right">
-          <i class="fa fa-plus"></i>
-        </button>
+        
       </div>
 
       <!--end filter todo-->
     </div>
-    <div class="row padding-top-lg">
+    <div class="row ">
       <div class="col-md-12">
-        
+
         <!--panel agenda-->
         <div class="panel panel-default" ng-repeat="todo in todos | filter:data.todo">
           <div class="panel-body">
