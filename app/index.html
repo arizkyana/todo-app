@@ -19,16 +19,16 @@
 
 <body>
 
-  <div class="container padding-top-lg">
+  <div class="container padding-top-lg" ng-controller="TodoController">
     <div class="row">
       <!--filter todo-->
       <div class="col-md-12">
         <div class="form-group">
-          <input type="text" class="form-control input-lg" ng-model="data.filter" placeholder="Cari Agenda" />
+          <input type="text" class="form-control input-lg" ng-model="data.todo" placeholder="Cari Agenda" />
         </div>
       </div>
       <div class="col-md-12 no-overflow">
-        <button type="button" class="btn btn-primary pull-right">
+        <button ng-click="addTodo()" type="button" class="btn btn-primary pull-right">
           <i class="fa fa-plus"></i>
         </button>
       </div>
@@ -37,25 +37,26 @@
     </div>
     <div class="row padding-top-lg">
       <div class="col-md-12">
+        
         <!--panel agenda-->
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-repeat="todo in todos | filter:data.todo">
           <div class="panel-body">
             <div class="row">
               <div class="col-md-8">
                 <div class="checkbox">
                   <label>
-                    <input type="checkbox" /> Agenda 1
+                    <input type="checkbox" /> {{ todo.name }}
                   </label>
                 </div>
 
               </div>
               <div class="col-md-4 text-right">
-                
+
                 <div class="button-group">
                   <button type="button" class="btn btn-success">
                   <i class="fa fa-pencil"></i>
                 </button>
-                <button type="button" class="btn btn-danger">
+                  <button type="button" class="btn btn-danger">
                   <i class="fa fa-trash"></i>
                 </button>
                 </div>
