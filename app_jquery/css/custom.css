@@ -1,0 +1,17 @@
+.padding-top-lg {
+  padding-top: 5em;
+}
+
+.form-control, .btn, .panel, .panel-heading, .panel-body, .panel-footer{
+  border-radius: 0;
+}
+
+.container-center {
+  margin: 0 auto;
+}
+
+.no-overflow{
+  overflow: hidden;
+}
+
+
